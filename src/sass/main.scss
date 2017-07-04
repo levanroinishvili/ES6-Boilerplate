@@ -5,4 +5,4 @@
           border-radius: $radius;
 }
 
-body { @include border-radius(10px); margin:10px; border:1px solid red; background-color:blue; color:white;}
+body { @include border-radius(10px); margin:10px; border:1px solid red; }

@@ -1,16 +1,27 @@
-# le-es6
 # ES6 Boilerplate
 ## Transpiled into ES5
 
 # Installation
-`git clone `
+## Prerequisites
+* `node.js`
+* `gulp` installed globally (`npm install -g gulp`)
+
+## Downloading with `git` and intalling with `npm`
+* `mkdir es6-boilerplate`
+* `cd es6-boilerplate`
+* `git clone https://github.com/levanroinishvili/ES6-Boilerplate .`
+* `npm install`
+* `gulp` or `gulp build:serve:watch` (see *Gulp Tasks* below)
 
 ## Gulp Tasks
+The boilerplate comes with certain `gulp` tasks defined. The tasks may
+uneedupdating or modifying as the project grows.
+There are [Development Tasks](#development-tasks) and [Production Tasks](#production-tasks)
 
 ### Development Tasks
 In some cases it may be better to use the [Production Tasks](#production-tasks) even during development.
 The reason is that Production Tasks and Development tasks treat JavaScript files differently, and some code
-may respond differently to these treatments.
+will respond differently to these treatments.
 See [Differences Between Development and Production Behavior](#differences-between-development-and-production-behavior)
 
 * `gulp` the default task will transpile ES6 JavaScript and SASS (see below for details), will
