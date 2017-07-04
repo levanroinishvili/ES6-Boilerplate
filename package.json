@@ -1,0 +1,40 @@
+{
+  "name": "le-es6",
+  "version": "1.0.0",
+  "description": "Simple ES6 Project Boilerplate",
+  "main": "main.js",
+  "scripts": {
+    "test": "noTestYet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/levanroinishvili/ES6-Boilerplate.git"
+  },
+  "keywords": [
+    "ES6",
+    "Project",
+    "Boilerplate"
+  ],
+  "author": "Levan Roinishvili",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/levanroinishvili/ES6-Boilerplate/issues"
+  },
+  "homepage": "https://github.com/levanroinishvili/ES6-Boilerplate",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "browser-sync": "^2.18.12",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-print": "^2.0.1",
+    "gulp-processhtml": "^1.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "jshint": "^2.9.5",
+    "systemjs": "^0.20.14",
+    "systemjs-builder": "^0.16.9"
+  }
+}
