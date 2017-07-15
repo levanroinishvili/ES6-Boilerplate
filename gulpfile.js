@@ -1,26 +1,27 @@
-const gulp			= require('gulp');
-const browserSync	= require('browser-sync').create();
-const babel			= require('gulp-babel');
-const jshint		= require('gulp-jshint');
-const sass			= require('gulp-sass');
-const del			= require('del');
-const builder		= require('systemjs-builder');
-const concat		= require('gulp-concat');
-const uglify		= require('gulp-uglify');
-const processhtml	= require('gulp-processhtml');
-const print			= require('gulp-print');
-const chalk			= require('chalk');
+const gulp					= require('gulp');
+const browserSync		= require('browser-sync').create();
+const babel					= require('gulp-babel');
+const jshint				= require('gulp-jshint');
+const sass					= require('gulp-sass');
+const del						= require('del');
+const builder				= require('systemjs-builder');
+const concat				= require('gulp-concat');
+const uglify				= require('gulp-uglify');
+const processhtml		= require('gulp-processhtml');
+const print					= require('gulp-print');
+const chalk					= require('chalk');
 
-const es6_glob		= 'src/js-es6/**/*.js';		// Glob to match es6 JavaScript files
-const dev_es5_dest	= 'src/js';					// Where to output transpiled JavaScript during development
-const pro_es5_dest	= 'dist/js';				// Where to put JavaScript during build
+const es6_glob			= 'src/js-es6/**/*.js';		// Glob to match es6 JavaScript files
+const dev_es5_dest	= 'src/js';								// Where to output transpiled JavaScript during development
+const pro_es5_dest	= 'dist/js';							// Where to put JavaScript during build
 
-const app_entry_js	= 'js/main.js';				// Entry point to the applicaton on dev
-const app_out_js	= 'dist/js/main.js';		// Output file for bundled app on production
+const app_entry_js	= 'js/main.js';						// Entry point to the applicaton on dev
+const app_out_js		= 'dist/js/main.js';			// Output file for bundled app on production
 
-const sass_glob		= 'src/sass/**/*.scss';		// Glot matcing Sass source files
-const dev_css_dest	= 'src/css';				// Where to output transpiled Sass
+const sass_glob			= 'src/sass/**/*.scss';		// Glot matcing Sass source files
+const dev_css_dest	= 'src/css';							// Where to output transpiled Sass
 
+// Get current time as a string - used here for outputing task start and completion times
 function timenow() {
 	let d = new Date();
 	return String(d.getHours()) + ':' + String(d.getMinutes()) + ':' + String(d.getSeconds());
@@ -101,9 +102,10 @@ gulp.task('develop',['serve'],function() {
 		}
 	});
 
-	gulp.watch('src/css/**/*.css',		browserSync.reload);
-	gulp.watch('src/**/*.html',			browserSync.reload);
-	gulp.watch(dev_es5_dest+'/**/*.js',	browserSync.reload);
+	gulp.watch('src/**/*.css',		 								browserSync.reload);
+	gulp.watch('src/**/*.html',										browserSync.reload);
+	gulp.watch('src/**/*.{png,jpg,gif}', 					browserSync.reload);
+	gulp.watch(['src/**/*.js','!src/js-es6/**'],	browserSync.reload);
 });
 
 
@@ -133,6 +135,16 @@ function copy_css() {
 }
 gulp.task('copy:css',copy_css);
 
+function copy_images() {
+	return new Promise( (resolve,reject) => {
+		gulp.src('src/**/*.{png,jpg,gif}')
+			.pipe(gulp.dest('dist'))
+				.on('end',resolve)
+				.on('error',reject);
+	});
+}
+gulp.task('copy:images',copy_images);
+
 function copy_html() {
 	return new Promise ( (resolve,reject) => {
 		gulp.src('src/**/*.html')
@@ -150,6 +162,7 @@ function build() {
 		.then( ignore => Promise.all(
 			[
 				jsbundle(),
+				copy_images(),
 				copy_css(),
 				copy_html()
 			])
@@ -181,4 +194,5 @@ gulp.task('build:serve:watch', ['build:serve'], function() {
 		.on('error',console.log);
 	// gulp.watch('dist/**',browserSync.reload)
 	// 	.on('error',console.log);
+
 });
